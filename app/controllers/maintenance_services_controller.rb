@@ -13,20 +13,23 @@ class MaintenanceServicesController < ApplicationController
   # GET /maintenance_services/new
   def new
     @maintenance_service = MaintenanceService.new
+    @cars = Car.all
   end
 
   # GET /maintenance_services/1/edit
   def edit
+    @cars = Car.all
   end
 
   # POST /maintenance_services or /maintenance_services.json
   def create
+    @cars = Car.all
     @maintenance_service = MaintenanceService.new(maintenance_service_params)
 
     respond_to do |format|
       if @maintenance_service.save
         format.html { redirect_to @maintenance_service, notice: "Maintenance service was successfully created." }
-        format.json { render :show, status: :created, location: @maintenance_service }
+        format.json { redirect_to @maintenance_service, status: :created, location: @maintenance_service }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @maintenance_service.errors, status: :unprocessable_entity }
@@ -36,10 +39,11 @@ class MaintenanceServicesController < ApplicationController
 
   # PATCH/PUT /maintenance_services/1 or /maintenance_services/1.json
   def update
+    @cars = Car.all
     respond_to do |format|
       if @maintenance_service.update(maintenance_service_params)
         format.html { redirect_to @maintenance_service, notice: "Maintenance service was successfully updated." }
-        format.json { render :show, status: :ok, location: @maintenance_service }
+        format.json { redirect_to @maintenance_service, status: :ok, location: @maintenance_service }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @maintenance_service.errors, status: :unprocessable_entity }

@@ -1,14 +1,38 @@
-<p style="color: green"><%= notice %></p>
+<p class="has-text-success"><%= notice %></p>
 
-<h1>Maintenance services</h1>
+<h1 class="title is-3">Servicios de Mantenimiento</h1>
 
 <div id="maintenance_services">
-  <% @maintenance_services.each do |maintenance_service| %>
-    <%= render maintenance_service %>
-    <p>
-      <%= link_to "Show this maintenance service", maintenance_service %>
-    </p>
+  <% if @maintenance_services.any? %>
+    <table class="table is-striped is-hoverable is-fullwidth">
+      <thead>
+        <tr>
+          <th>Descripción</th>
+          <th>Estado</th>
+          <th>Fecha</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @maintenance_services.each do |maintenance_service| %>
+          <tr>
+            <td><%= maintenance_service.description %></td>
+            <td><%= maintenance_service.status %></td>
+            <td><%= maintenance_service.date %></td>
+            <td>
+              <div class="buttons are-small">
+                <%= link_to "Mostrar", maintenance_service, class: "button is-info" %>
+                <%= link_to "Editar", edit_maintenance_service_path(maintenance_service), class: "button is-warning" %>
+                <%= button_to "Eliminar", maintenance_service, method: :delete, data: { confirm: "¿Estás seguro?" }, class: "button is-danger" %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>No hay servicios de mantenimiento registrados.</p>
   <% end %>
 </div>
 
-<%= link_to "New maintenance service", new_maintenance_service_path %>
+<%= link_to "Nuevo servicio de mantenimiento", new_maintenance_service_path, class: "button is-primary" %>

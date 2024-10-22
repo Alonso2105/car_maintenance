@@ -1,9 +1,13 @@
-<h1>New car</h1>
+<section class="section">
+  <div class="container">
+    <h1 class="title is-3 has-text-centered">Nuevo Auto</h1>
 
-<%= render "form", car: @car %>
+    <div class="box">
+      <%= render "form", car: @car %>
+    </div>
 
-<br>
-
-<div>
-  <%= link_to "Back to cars", cars_path %>
-</div>
+    <div class="buttons is-centered">
+      <%= link_to "Cancelar", cars_path, class: "button is-light" %>
+    </div>
+  </div>
+</section>

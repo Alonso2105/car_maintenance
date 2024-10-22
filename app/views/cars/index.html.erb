@@ -1,14 +1,33 @@
-<p style="color: green"><%= notice %></p>
+<p class="has-text-success"><%= notice %></p>
 
-<h1>Cars</h1>
+<h1 class="title">Autos</h1>
 
 <div id="cars">
-  <% @cars.each do |car| %>
-    <%= render car %>
-    <p>
-      <%= link_to "Show this car", car %>
-    </p>
-  <% end %>
+  <table class="table is-striped is-hoverable is-fullwidth">
+    <thead>
+      <tr>
+        <th>Número de Placa</th>
+        <th>Modelo</th>
+        <th>Año</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cars.each do |car| %>
+        <tr>
+          <td><%= car.plate_number %></td>
+          <td><%= car.model %></td>
+          <td><%= car.year %></td>
+          <td>
+          <div class="buttons are-small">
+              <%= link_to "Mostrar", car, class: "button is-info" %>
+              <%= link_to "Editar", edit_car_path(car), class: "button is-warning" %>
+              <%= button_to "Eliminar", car, method: :delete, data: { confirm: "¿Estás seguro?" }, class: "button is-danger" %>
+          </div>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
 
-<%= link_to "New car", new_car_path %>
+<%= link_to "Nuevo Auto", new_car_path, class: "button is-primary" %>

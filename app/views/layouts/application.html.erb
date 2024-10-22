@@ -7,10 +7,26 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <%= yield %>
+    <!-- Navbar -->
+    <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+      <div id="navbarBasic" class="navbar-menu">
+        <div class="navbar-start">
+          <%= link_to "Autos", cars_path, class: "navbar-item" %>
+          <%= link_to "Mantenimientos", maintenance_services_path, class: "navbar-item" %>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main content -->
+    <section class="section">
+      <div class="container">
+        <%= yield %>
+      </div>
+    </section>
   </body>
 </html>

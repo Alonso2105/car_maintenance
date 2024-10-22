@@ -1,10 +1,10 @@
-<h1>Editing maintenance service</h1>
+<h1 class="title is-3">Editar Servicio de Mantenimiento</h1>
 
-<%= render "form", maintenance_service: @maintenance_service %>
+<div class="box">
+  <%= render "form", maintenance_service: @maintenance_service %>
+</div>
 
-<br>
-
-<div>
-  <%= link_to "Show this maintenance service", @maintenance_service %> |
-  <%= link_to "Back to maintenance services", maintenance_services_path %>
+<div class="buttons">
+  <%= link_to "Mostrar este servicio", @maintenance_service, class: "button is-link" %>
+  <%= link_to "Volver a la lista de servicios", maintenance_services_path, class: "button is-light" %>
 </div>

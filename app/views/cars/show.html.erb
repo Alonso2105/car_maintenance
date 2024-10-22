@@ -1,10 +1,44 @@
-<p style="color: green"><%= notice %></p>
+<p class="has-text-success"><%= notice %></p>
 
-<%= render @car %>
+<div class="box">
+  <h2 class="title is-4">Detalles del Auto</h2>
+  
+  <p><strong>Número de Placa:</strong> <%= @car.plate_number %></p>
+  <p><strong>Modelo:</strong> <%= @car.model %></p>
+  <p><strong>Año:</strong> <%= @car.year %></p>
+</div>
 
-<div>
-  <%= link_to "Edit this car", edit_car_path(@car) %> |
-  <%= link_to "Back to cars", cars_path %>
+<!-- Servicios asociados -->
+<div class="box">
+  <h2 class="title is-4">Servicios de Mantenimiento</h2>
 
-  <%= button_to "Destroy this car", @car, method: :delete %>
+  <% if @services.any? %>
+    <table class="table is-striped is-fullwidth">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Descripción</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @services.each do |service| %>
+          <tr>
+            <td><%= service.date %></td>
+            <td><%= service.description %></td>
+            <td><%= service.status %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>No hay servicios de mantenimiento registrados para este auto.</p>
+  <% end %>
+</div>
+
+<!-- Botones de acción -->
+<div class="buttons">
+  <%= link_to "Editar este auto", edit_car_path(@car), class: "button is-warning" %>
+  <%= link_to "Volver a la lista de autos", cars_path, class: "button is-link" %>
+  <%= button_to "Eliminar este auto", @car, method: :delete, data: { confirm: "¿Estás seguro?" }, class: "button is-danger" %>
 </div>

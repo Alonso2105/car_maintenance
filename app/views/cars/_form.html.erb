@@ -1,32 +1,50 @@
-<%= form_with(model: car) do |form| %>
-  <% if car.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(car.errors.count, "error") %> prohibited this car from being saved:</h2>
+<%= form_with(model: car, local: true) do |form| %>
 
+  <% if car.errors.any? %>
+    <div class="notification is-danger">
+      <h2 class="title is-5"><%= pluralize(car.errors.count, "error") %> impidieron que se guardara este auto:</h2>
       <ul>
-        <% car.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+        <% car.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :plate_number, style: "display: block" %>
-    <%= form.text_field :plate_number %>
+  <div class="field">
+    <%= form.label :plate_number, "Numero de placa", class: "label" %>
+    <div class="control">
+      <%= form.text_field :plate_number, class: "input #{'is-danger' if car.errors[:plate_number].any?}" %>
+    </div>
+    <% if car.errors[:plate_number].any? %>
+      <p class="help is-danger"><%= car.errors[:plate_number].first %></p>
+    <% end %>
   </div>
 
-  <div>
-    <%= form.label :model, style: "display: block" %>
-    <%= form.text_field :model %>
+  <div class="field">
+    <%= form.label :model, "Modelo", class: "label" %>
+    <div class="control">
+      <%= form.text_field :model, class: "input #{'is-danger' if car.errors[:model].any?}" %>
+    </div>
+    <% if car.errors[:model].any? %>
+      <p class="help is-danger"><%= car.errors[:model].first %></p>
+    <% end %>
   </div>
 
-  <div>
-    <%= form.label :year, style: "display: block" %>
-    <%= form.number_field :year %>
+  <div class="field">
+    <%= form.label :year, "Año", class: "label" %>
+    <div class="control">
+      <%= form.number_field :year, class: "input #{'is-danger' if car.errors[:year].any?}" %>
+    </div>
+    <% if car.errors[:year].any? %>
+      <p class="help is-danger"><%= car.errors[:year].first %></p>
+    <% end %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="field">
+    <div class="control">
+      <%= form.submit "Guardar Auto", class: "button is-primary" %>
+    </div>
   </div>
+
 <% end %>

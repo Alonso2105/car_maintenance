@@ -1,37 +1,49 @@
-<%= form_with(model: maintenance_service) do |form| %>
-  <% if maintenance_service.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(maintenance_service.errors.count, "error") %> prohibited this maintenance_service from being saved:</h2>
+<%= form_with(model: maintenance_service, local: true) do |form| %>
 
+  <% if maintenance_service.errors.any? %>
+    <div class="notification is-danger">
+      <h2 class="title is-5"><%= pluralize(maintenance_service.errors.count, "error") %> impidieron que se guardara este servicio:</h2>
       <ul>
-        <% maintenance_service.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+        <% maintenance_service.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :car_id, style: "display: block" %>
-    <%= form.text_field :car_id %>
+  <!-- Select para Carros -->
+  <div class="field">
+    <%= form.label :car_id, "Seleccione un Auto", class: "label" %>
+    <div class="control">
+      <%= form.collection_select :car_id, @cars, :id, :plate_number, { prompt: "Seleccione un auto" }, class: "input" %>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_field :description %>
+  <div class="field">
+    <%= form.label :description, "Descripción", class: "label" %>
+    <div class="control">
+      <%= form.text_field :description, class: "input" %>
+    </div>
   </div>
 
-  <div>
-  <%= form.label :status, style: "display: block" %>
-  <%= form.select :status, MaintenanceService.statuses.keys.map { |status| [status.humanize, status] } %>
-</div>
-
-  <div>
-    <%= form.label :date, style: "display: block" %>
-    <%= form.date_field :date %>
+  <div class="field">
+    <%= form.label :status, "Estado", class: "label" %>
+    <div class="control">
+      <%= form.select :status, MaintenanceService.statuses.keys.map { |status| [status.humanize, status] }, {}, class: "input" %>
+    </div>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="field">
+    <%= form.label :date, "Fecha", class: "label" %>
+    <div class="control">
+      <%= form.date_field :date, class: "input" %>
+    </div>
   </div>
+
+  <div class="field is-grouped">
+    <div class="control">
+      <%= form.submit "Guardar", class: "button is-primary" %>
+    </div>
+  </div>
+
 <% end %>
