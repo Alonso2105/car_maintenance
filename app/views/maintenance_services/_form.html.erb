@@ -22,9 +22,9 @@
   </div>
 
   <div>
-    <%= form.label :status, style: "display: block" %>
-    <%= form.number_field :status %>
-  </div>
+  <%= form.label :status, style: "display: block" %>
+  <%= form.select :status, MaintenanceService.statuses.keys.map { |status| [status.humanize, status] } %>
+</div>
 
   <div>
     <%= form.label :date, style: "display: block" %>

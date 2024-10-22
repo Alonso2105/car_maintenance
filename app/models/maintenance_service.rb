@@ -7,6 +7,15 @@ class MaintenanceService < ApplicationRecord
   # Validación para que la descripción esté presente.
   validates :description, presence: true
   
-  # Validación para que la fecha esté presente y sea una fecha pasada o presente.
-  validates :date, presence: true, timeliness: { on_or_before: -> { Date.current }, type: :date }
+    # Validación para que la fecha este presente y sea válida.
+    validates :date, presence: true
+    validate :date_cannot_be_in_the_future
+
+    private
+  
+    def date_cannot_be_in_the_future
+      if date.present? && date > Date.today
+        errors.add(:date, "la fecha debe ser una fecha pasada o presente")
+      end
+    end
 end
