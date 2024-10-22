@@ -1,7 +1,7 @@
 module Api
   module V1
     class MaintenanceServicesController < ApiController
-      before_action :set_maintenance_service, only: %i[ show edit update destroy ]
+      before_action :set_maintenance_service, only: %i[ show update destroy ]
 
       # GET /maintenance_services or /maintenance_services.json
       def index
@@ -28,7 +28,6 @@ module Api
           render json: { errors: ["El coche especificado no existe"] }, status: :unprocessable_entity
         end
       end
-      
 
       # PATCH/PUT /maintenance_services/1 or /maintenance_services/1.json
       def update

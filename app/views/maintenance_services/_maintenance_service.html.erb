@@ -1,22 +1,21 @@
-<div id="<%= dom_id maintenance_service %>">
+<div id="<%= dom_id maintenance_service %>" class="box">
   <p>
-    <strong>Car:</strong>
-    <%= maintenance_service.car_id %>
+    <strong>Auto:</strong>
+    <%= maintenance_service.car.plate_number %> <!-- Accede al atributo del auto relacionado -->
   </p>
 
   <p>
-    <strong>Description:</strong>
+    <strong>Descripción:</strong>
     <%= maintenance_service.description %>
   </p>
 
   <p>
-    <strong>Status:</strong>
-    <%= maintenance_service.status %>
+    <strong>Estado:</strong>
+    <%= maintenance_service.status.humanize %> <!-- Humanizamos el estado para mejor legibilidad -->
   </p>
 
   <p>
-    <strong>Date:</strong>
-    <%= maintenance_service.date %>
+    <strong>Fecha:</strong>
+    <%= maintenance_service.date.strftime('%d/%m/%Y') %> <!-- Formateamos la fecha -->
   </p>
-
 </div>
